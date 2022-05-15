@@ -20,3 +20,94 @@ Now we move onto the timing diagrams.
 ![image](https://user-images.githubusercontent.com/38709917/168493561-58ad00cd-aee7-42c2-a726-e327e0de0558.png)
 
 Each instruction type is expected to have the same timing diagram. On the positive edge, the instruction is read from memory in the first clock cycle. Then the instruction is decoded, or essentially parsed into its parts on the negative edge of the second clock cycle. On third clock cycle’s positive edge, the ALU operation is performed. On the fourth cycle’s positive edge, we load the data back into the data memory and then we write it back into the register on the fourth cycle’s negative edge. On the fifth cycle’s positive edge the data in the register is loaded again. 
+
+
+Branching Algorithm: 
+
+ 
+
+In C: 
+
+ 
+
+if (g < h): 
+
+f = g + h 
+
+else  
+
+f = g & h 
+
+ 
+
+In Assembly: 
+
+ 
+
+Let g = X0, h = X1, f = X2 
+
+ 
+
+SLT X3 X0 X1 
+
+CBZ Else 
+
+ADD X2 X0 X1 
+
+Else: 
+
+AND X2 X0 X1  
+
+ 
+
+ 
+
+In Machine Code: 
+
+ 
+
+011 011 000 001 
+
+110 Else 
+
+000 010 000 001 
+
+ 
+
+Else: 
+
+001 010 000 001 
+
+ 
+
+ 
+
+Simple Code to Execute  
+
+ 
+
+In C: 
+
+ 
+
+f = g + h 
+
+ 
+
+Let f = X1 g = X0 h = X2 
+
+ 
+
+ADD X1 X0 X2 
+
+ 
+
+TO MACHINE CODE: 
+
+000 001 000 010 
+
+ 
+
+ 
+
+To simulate the machine code, we first load it into memfile.dat, where it should be accessed by the instruction memory (IMEM). 
