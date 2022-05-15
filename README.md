@@ -16,3 +16,5 @@ This is an I type operation. The specific opcode for this one is 101, which is u
 
 
 ![image](https://user-images.githubusercontent.com/38709917/168493561-58ad00cd-aee7-42c2-a726-e327e0de0558.png)
+
+Each instruction type is expected to have the same timing diagram. On the positive edge, the instruction is read from memory in the first clock cycle. Then the instruction is decoded, or essentially parsed into its parts on the negative edge of the second clock cycle. On third clock cycle’s positive edge, the ALU operation is performed. On the fourth cycle’s positive edge, we load the data back into the data memory and then we write it back into the register on the fourth cycle’s negative edge. On the fifth cycle’s positive edge the data in the register is loaded again. 
