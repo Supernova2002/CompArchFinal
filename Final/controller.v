@@ -1,6 +1,7 @@
 `include "maindec.v"
 `include "aludec.v"
-module controller(input   [5:0] op, funct,
+module controller(input   [2:0] op, 
+                  input   [3:0] funct,
                   input         zero,
                   output        memtoreg, memwrite,
                   output        pcsrc, alusrc,

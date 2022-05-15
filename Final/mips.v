@@ -11,7 +11,7 @@ wire      memtoreg, alusrc, regdst,
               regwrite, jump, pcsrc, zero;
 wire [2:0] alucontrol;
 
-controller c(instr[15:10], instr[5:0], zero,
+controller c(instr[15:13], instr[3:0], zero,
                memtoreg, memwrite, pcsrc,
                alusrc, regdst, regwrite, jump,
                alucontrol);

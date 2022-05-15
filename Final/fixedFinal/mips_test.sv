@@ -2,12 +2,12 @@
 `timescale 10ms/100   us // 1ms period, 10us precision
 module mips_single_cycle_tb();
 
-  reg       clk;
+  logic       clk;
   logic       reset;
 
   input logic [7:0] writedata;
-  input [2:0] dataadr;
-  input        memwrite;
+  input logic [2:0] dataadr;
+  input logic       memwrite;
 
   // instantiate device to be tested
   top dut(clk, reset, writedata, dataadr, memwrite);
@@ -52,7 +52,7 @@ endmodule
 
 module top(input  logic        clk, reset, 
            output logic [7:0] writedata, 
-           output logic [2:0]dataadr, 
+           output logic [2:0] dataadr, 
            output logic        memwrite);
 
   logic [15:0] pc, instr;
@@ -65,32 +65,32 @@ module top(input  logic        clk, reset,
 endmodule
 
 module adder #(parameter WIDTH = 8)
-             (input   [WIDTH-1:0] a, b,
-             output  [WIDTH-1:0] y);
+             (input logic   [WIDTH-1:0] a, b,
+             output logic [WIDTH-1:0] y);
 
   assign y = a + b;
 endmodule
 
-module alu(input logic   [7:0] a, b,
-           input logic  [2:0]  alucontrol,
-           output logic [7:0] result,
-           output  logic       zero);
+  module alu(input logic   [7:0] a, b,
+            input logic  [2:0]  alucontrol,
+            output logic [7:0] result,
+            output  logic       zero);
 
-  logic [7:0] condinvb, sum;
+    logic [7:0] condinvb, sum;
 
-  assign condinvb = alucontrol[2] ? ~b : b;
-  assign sum = a + condinvb + alucontrol[2];
+    assign condinvb = alucontrol[2] ? ~b : b;
+    assign sum = a + condinvb + alucontrol[2];
 
-  always @*
-    case (alucontrol[1:0])
-      2'b00: result = a & b;
-      2'b01: result = a | b;
-      2'b10: result = sum;
-      2'b11: result = sum[7];
-    endcase
+    always @*
+      case (alucontrol[1:0])
+        2'b00: result = a & b;
+        2'b01: result = a | b;
+        2'b10: result = sum;
+        2'b11: result = sum[7];
+      endcase
 
-  assign zero = (result == 8'b0);
-endmodule
+    assign zero = (result == 8'b0);
+  endmodule
 
 module aludec(input logic  [3:0] funct,
               input logic  [1:0] aluop,
@@ -160,11 +160,11 @@ module mux2 #(parameter WIDTH = 8)
   assign y = s ? d1 : d0; 
 endmodule
 
-module reg_file(input          clk, 
-               input         we3, 
-               input   [2:0]  ra1, ra2, wa3, 
-               input   [7:0] wd3, 
-               output  [7:0] rd1, rd2);
+module reg_file(input logic          clk, 
+               input logic        we3, 
+               input logic  [2:0]  ra1, ra2, wa3, 
+               input logic  [7:0] wd3, 
+               output logic [7:0] rd1, rd2);
 
   logic [7:0] rf[7:0];
 
@@ -250,7 +250,7 @@ module datapath(input logic         clk, reset,
   // register file logic
   reg_file     rf(clk, regwrite, instr[12:10], instr[9:7], 
                  writereg, result, srca, writedata);
-  mux2 #(3)   wrmux(instr[8:6], instr[2:0],
+  mux2 #(3)   wrmux(instr[9:7], instr[2:0],
                     regdst, writereg);
   mux2 #(8)  resmux(aluout, readdata, memtoreg, result);
   signext     se(instr[7:0], signimm);

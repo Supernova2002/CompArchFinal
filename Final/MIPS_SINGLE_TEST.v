@@ -5,8 +5,9 @@
 `timescale 10ms/100   us // 1ms period, 10us precision
 module mips_single_cycle_tb();
 
-  input        clk;
-  input        reset;
+  input clk;
+  //input        clk;
+  input reset;
 
   input [7:0] writedata;
   input [2:0] dataadr;
@@ -30,6 +31,7 @@ module mips_single_cycle_tb();
   initial
     begin
       reset <= 1; # 22; reset <= 0;
+       
     end
   // generate clock to sequence tests
   always
@@ -55,13 +57,13 @@ endmodule
 
 module top(input  wire        clk, reset, 
            output wire [7:0] writedata, 
-           output wire [7:0] dataadr, 
+           output wire [2:0] dataadr, 
            output wire        memwrite);
 
   wire [15:0] pc, instr;
   wire [7:0] readdata; 
   // instantiate processor and memories
-  mips mips(clk, reset, pc, instr, memwrite, dataadr, 
+  mips mips(clk, reset, pc, instr, memwrite, {5'b00000, dataadr}, 
             writedata, readdata);
   imem imem(pc[7:2], instr);
   
