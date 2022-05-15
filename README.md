@@ -1,6 +1,8 @@
 ﻿# CompArchFinal
 To implement the idea of an 8 bit computer, we first had to implement an ISA. We decided early on that we wanted to follow a design similar to the Ottobit CPU. Therefore, we decided to use a 16 bit instruction length, with 3 bit register addressing and a 3 bit opcode. To do this, we began with Professor Marano's MIPS single cycle 32 bit cpu code, and attempted to pare it down to 8 bits with a smaller instruction length and addressing width. Below you will find datapath and control diagrams for the general case and for each of the 3 operation types. As we were unable to get the CPU to work, having trouble with minor errors at the end of the project, we have included sample code and the theoretical timing diagrams for this code if it were to be run.
 
+The only files that should be used are in the fixedFile folder. These are the mips_test.sv file, which is run by running clean.bat, compile.bat, and then display.bat, in that order. This will utilize the memfile.dat file. The assembler.py is incomplete but included due to significant progress being made on it in the hopes of credit.
+
 ![image](https://user-images.githubusercontent.com/38709917/168491497-818d51da-2a32-4af2-8163-f6bd138633d0.png)
 ![image](https://user-images.githubusercontent.com/38709917/168491518-1eccc44f-420f-46e3-a463-1e0e23fd22e8.png)
 
