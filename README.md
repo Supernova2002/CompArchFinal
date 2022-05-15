@@ -14,4 +14,4 @@ This is an I type operation. The specific opcode for this one is 101, which is u
 
 
 
-![image](https://user-images.githubusercontent.com/38709917/168493466-6614cb5a-3991-4671-bb27-99bf403057fd.png)
+![image](https://user-images.githubusercontent.com/38709917/168493549-10da9113-7d4d-4cba-a27b-90abf2f26912.png)
